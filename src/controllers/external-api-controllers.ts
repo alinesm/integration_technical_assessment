@@ -1,13 +1,8 @@
-import { NextFunction } from "express";
 import { Request, Response } from "express";
 import externalApiService from "../services/external-api-services";
 import { storeLastProperty } from "../helpers/index";
 
-export async function getRandomUser(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function getRandomUser(req: Request, res: Response) {
   try {
     const randomUserDataTransformed =
       await externalApiService.getUserAndtransformToProperty();
