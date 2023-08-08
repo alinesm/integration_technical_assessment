@@ -1,0 +1,10 @@
+{
+  "address": "Bøgebjergvej 4390 34944 København Sv Danmark Denmark",
+  "box": "64ac62633f250c0014f65dc2",
+  "client": {
+    "observation": "filippa.sorensen@example.com",
+    "code": "filippa.sørensen"
+  },
+  "auto_connect": false,
+  "force": true
+}

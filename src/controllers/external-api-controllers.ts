@@ -1,7 +1,7 @@
-import axios from "axios";
 import { NextFunction } from "express";
-import httpStatus from "http-status";
 import { Request, Response } from "express";
+import externalApiService from "../services/external-api-services";
+import { storeLastProperty } from "../helpers/index";
 
 export async function getRandomUser(
   req: Request,
@@ -9,10 +9,13 @@ export async function getRandomUser(
   next: NextFunction
 ) {
   try {
-    const response = await axios.get("https://randomuser.me/api");
-    console.log(response.data);
-    res.status(200).json(response.data);
+    const randomUserDataTransformed =
+      await externalApiService.getUserAndtransformToProperty();
+
+    storeLastProperty(randomUserDataTransformed);
+
+    res.status(200).json(randomUserDataTransformed);
   } catch (error) {
-    next(error);
+    res.status(404).send(error.message);
   }
 }
