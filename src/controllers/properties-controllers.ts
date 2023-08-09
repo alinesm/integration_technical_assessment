@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Property } from "../protocols";
+import { Property } from "../helpers/protocols";
 import { getLastProperty, storeLastProperty } from "../helpers";
 import externalApiService from "../services/external-api-services";
 import cron from "node-cron";
