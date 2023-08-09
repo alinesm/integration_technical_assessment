@@ -1,6 +1,6 @@
 import externalApiRepository from "../repositories/external-api-repository";
 import { transformData } from "../helpers/index";
-import { Property } from "../protocols";
+import { Property } from "../helpers/protocols";
 
 async function getUserAndtransformToProperty(): Promise<Property> {
   try {

@@ -1,5 +1,5 @@
 import fs from "fs";
-import { Property, User } from "../protocols";
+import { Property, User } from "./protocols";
 import logger from "./logger";
 
 export function transformData(user: User) {

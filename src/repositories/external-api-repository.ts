@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../protocols";
+import { User } from "../helpers/protocols";
 
 async function getRandomUser(): Promise<User> {
   const result = await axios.get(process.env.RANDOM_USER_API_URL);
