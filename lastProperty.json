@@ -1,9 +1,9 @@
 {
-  "address": "Bøgebjergvej 4390 34944 København Sv Danmark Denmark",
+  "address": "Kirchplatz 6881 32341 Geretsried Sachsen-Anhalt Germany",
   "box": "64ac62633f250c0014f65dc2",
   "client": {
-    "observation": "filippa.sorensen@example.com",
-    "code": "filippa.sørensen"
+    "observation": "elke.burkhardt@example.com",
+    "code": "elke.burkhardt"
   },
   "auto_connect": false,
   "force": true
