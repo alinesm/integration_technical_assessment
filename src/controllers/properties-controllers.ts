@@ -4,6 +4,7 @@ import { getLastProperty, storeLastProperty } from "../helpers";
 import externalApiService from "../services/external-api-services";
 import cron from "node-cron";
 import logger from "../../logger";
+import { updateReport } from "../helpers/update-report";
 
 export async function createProperty(property: Property) {
   const options = {
@@ -18,13 +19,21 @@ export async function createProperty(property: Property) {
   };
   try {
     const { data } = await axios.request(options);
-    logger.info("Property created successfully: " + JSON.stringify(data));
     console.log("data", data);
+
+    logger.info(
+      `Property created for client_code: ${property.client.code} -> Data: ` +
+        JSON.stringify(data)
+    );
+    updateReport(`Property created for client_code: ${property.client.code}`);
   } catch (error) {
     logger.error(
-      "Error while creating property: " + JSON.stringify(error.response.data)
+      `Error while creating property for client_code: ${property.client.code} ` +
+        JSON.stringify(error.response.data)
     );
-    console.error(error.response.data);
+    updateReport(
+      `Error while creating property for client_code: ${property.client.code} `
+    );
   }
 }
 
@@ -43,7 +52,6 @@ export async function createTwoProperties() {
     storeLastProperty(newProperty);
   } catch (error) {
     logger.error("Error in createTwoProperties: " + error.message);
-    console.error(error);
   }
 }
 
