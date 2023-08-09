@@ -1,51 +1,52 @@
-# Avaliação Técnica
+## 1. Introdução
 
-<a id="sumario"></a>
-## Sumário
+Esta aplicação é uma implementação de uma API que é executada a cada X minutos, com o objetivo principal de criar duas propriedades com dados de clientes na base da OZmap. Para isso, ela realiza consultas a uma API externa para obter um usuário aleatório e, em seguida, realiza transformações nos dados para criar propriedades na OZmap.
 
-<!-- TOC -->
-  * [Tarefa](#tarefa)
-  * [Instruções](#instrucoes)
-  * [Dados necessários](#dados)
-  * [Submissão da solução](#submissao)
-<!-- /TOC -->
+## 2. Tecnologias e Dependências
 
-<a id="tarefa"></a>
-## 1. Tarefa
+A aplicação foi desenvolvida com Node.js e Typescript. As principais bibliotecas e ferramentas utilizadas são:
 
- A avaliação envolve a execução de algumas tarefas desempenhadas no setor de integração da empresa, com o objetivo de avaliar a solução desenvolvida pelo candidato para o problema proposto. 
- A tarefa consiste no desenvolvimento de uma aplicação backend em Node.js ou Typescript que deverá ser executada a cada X minutos. Essa aplicação realizará consultas em uma API pública e utilizará os dados obtidos para criar elementos na base OZmap por meio de uma API. Além disso, são requisitos adicionais:
- * Tempo de intervalo entre cada execução da aplicação definido por uma variável de ambiente.
- * Implementação de um logger para registrar as ações realizadas pela aplicação.
- * Criação de um endpoint para visualização dos logs da aplicação por meio do navegador.
- * A cada execução da aplicação, deverá ser exportado um relatório que será incrementado com informações sobre as ações realizadas, incluindo aquelas que apresentarem erro.
- * Elaboração de uma documentação para a aplicação.
- 
-<a id="instrucoes"></a>
-## 2. Instruções
+- **Express:** Para criação de endpoints.
+- **Axios:** Para efetuar requisições HTTP.
+- **Dotenv:** Para gerenciamento de variáveis de ambiente.
+- **Cron:** Para executar tarefas em intervalos programados.
+- **Winston:** Para registro e monitoramento das atividades da aplicação.
 
- A API externa consultada retorna um usuário aleatório a cada requisição. Na primeira execução da aplicação, ela deve consultar a API externa e usar os dados obtidos para criar um imóvel com cliente no OZmap. Nas execuções seguintes, a aplicação deve tentar criar dois imóveis com cliente no OZmap: um com os mesmos dados da execução anterior e outro com novos dados coletados novamente na API externa. Para definir os atributos do imóvel com cliente no OZmap, considere as seguintes orientações:
- * Dados fixos: box = 64ac62633f250c0014f65dc2, auto_connect = false, force = true;
- * Dados variáveis:
-   address = location.street.name + location.street.number + location.postcode + location.city + location.state + location.country;
-   client.name = name.first + name.last;
-   client.code = name.first + "." + name.last (tudo em minúsculo);
-   client.observation = email;
+## 3. Funcionalidades
 
-<a id="dados"></a>
-## 3. Dados necessários
-* API externa: https://randomuser.me/api
-* Documentação API OZmap: https://ozmap.stoplight.io/docs/ozmap/180b1534fb63f-cria-um-imovel
-* URL da base OZmap: http://sandbox.ozmap.com.br:9090
-* Chave-api da base OZmap:
-```json
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtb2R1bGUiOiJhcGkiLCJ1c2VyIjoiNWQ5ZjNmYjgyMDAxNDEwMDA2NDdmNzY4IiwiY3JlYXRpb25EYXRlIjoiMjAyMy0wNy0xMFQxNTowMzoyOC4zOTBaIiwiaWF0IjoxNjg5MDAxNDA4fQ.rACa9_8wIp7FjbGHVEzvaQmtotsOvGnmQPf2Z1yMFw8
-```
+### Processo de Consulta à API:
 
-<a id="submissao"></a>
-## 4. Submissão da solução
+- Consulta à API externa para obter um usuário aleatório.
+- Transformação dos dados do usuário para criar a propriedade no formato esperado pela API da OZmap.
+- Verificação da tentativa de criação da propriedade (primeira ou subsequente).
+- Criação da propriedade na OZmap.
+- Armazenamento dos dados da última propriedade em um arquivo de log.
 
-Para que sua solução possa ser avaliada, ela precisa ser submetida de acordo com as estipulações listadas abaixo:
+### Processo de Armazenamento:
 
-* Realize o fork deste repositório.
-* Faça os commits da sua solução em um branch com o seguinte formato de nome: `solution/[your-github-username]`.
+- Verificação e validação dos dados antes de criar a propriedade na OZmap.
+- Criação da propriedade no OZmap com base nos dados armazenados no arquivo de log.
+- Atualização do arquivo de log com dados da última propriedade criada.
+
+## 4. Registro e Visualização de Logs
+
+Os logs da aplicação podem ser acessados de três maneiras:
+
+- Diretamente pelo arquivo "application.log" na raiz do diretório da aplicação, onde os logs são armazenados em formato JSON.
+- No arquivo "application.report.txt", também localizado na raiz, apresentando os logs no formato: "[YYYY-MM-DD HH:MM:SS] [NÍVEL] Mensagem de log".
+- Através de um navegador, acessando [http://localhost:4000/logs](http://localhost:4000/logs). Ajuste a URL se a aplicação estiver rodando em uma porta diferente.
+
+## 5. API Endpoints
+
+| Método | Path        | Descrição                                                      |
+| ------ | ----------- | -------------------------------------------------------------- |
+| GET    | /users      | Retorna dados do usuário e da propriedade em formato esperado. |
+| POST   | /properties | Cria duas propriedades na base OZmap.                          |
+| GET    | /logs       | Exibe os logs da aplicação em formato JSON.                    |
+
+## Instalação
+
+1. Clonar o repositório: `git clone https://github.com/alinesm/integration_technical_assessment/tree/solution/alinesm`.
+2. Instalar dependências: `npm install`.
+3. Configurar variáveis ​​de ambiente: Copie `.env.example` para `.env` e ajuste as variáveis conforme necessário.
+4. Executar aplicação: `npm run dev`.

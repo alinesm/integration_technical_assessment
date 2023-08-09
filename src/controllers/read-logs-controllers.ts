@@ -1,5 +1,5 @@
 import path from "path";
-import logger from "../../logger";
+import logger from "../helpers/logger";
 import { Request, Response } from "express";
 
 export function getLogs(req: Request, res: Response) {

@@ -3,7 +3,7 @@ import { Property } from "../protocols";
 import { getLastProperty, storeLastProperty } from "../helpers";
 import externalApiService from "../services/external-api-services";
 import cron from "node-cron";
-import logger from "../../logger";
+import logger from "../helpers/logger";
 import { updateReport } from "../helpers/update-report";
 
 export async function createProperty(property: Property) {

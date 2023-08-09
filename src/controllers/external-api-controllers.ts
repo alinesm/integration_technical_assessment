@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import externalApiService from "../services/external-api-services";
 import { storeLastProperty } from "../helpers/index";
-import logger from "../../logger";
+import logger from "../helpers/logger";
 import { updateReport } from "../helpers/update-report";
 
 export async function getRandomUser(req: Request, res: Response) {
