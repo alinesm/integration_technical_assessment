@@ -25,13 +25,17 @@ export async function createProperty(property: Property) {
       `Property created for client_code: ${property.client.code} -> Data: ` +
         JSON.stringify(data)
     );
-    updateReport(`Property created for client_code: ${property.client.code}`);
+    updateReport(
+      "info",
+      `Property created for client_code: ${property.client.code}`
+    );
   } catch (error) {
     logger.error(
       `Error while creating property for client_code: ${property.client.code} ` +
         JSON.stringify(error.response.data)
     );
     updateReport(
+      "error",
       `Error while creating property for client_code: ${property.client.code} `
     );
   }
@@ -51,7 +55,8 @@ export async function createTwoProperties() {
 
     storeLastProperty(newProperty);
   } catch (error) {
-    logger.error("Error in createTwoProperties: " + error.message);
+    logger.error(`Error in create Two Properties:  ${error.message}`);
+    updateReport("error", `Error in create Two Properties: ${error.message} `);
   }
 }
 

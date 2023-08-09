@@ -14,16 +14,15 @@ export async function getRandomUser(req: Request, res: Response) {
     res.status(200).json(randomUserDataTransformed);
 
     logger.info(
-      `Fetch random user with property for client_code: ${randomUserDataTransformed.client.code} -> Data: ` +
+      `Success in fetch user and add property info to client_code: ${randomUserDataTransformed.client.code} -> Data: ` +
         JSON.stringify(randomUserDataTransformed)
     );
     updateReport(
-      `Fetch random user with property for client_code: ${randomUserDataTransformed.client.code}`
+      "info",
+      `Success in fetch user and add property info to client_code: ${randomUserDataTransformed.client.code}`
     );
   } catch (error) {
     res.status(404).send(error.message);
-    logger.error(
-      `Error while fetching random user property for client_code: ${error} `
-    );
+    logger.error(`Error while fetching random user : ${error} `);
   }
 }
